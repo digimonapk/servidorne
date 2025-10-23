@@ -897,6 +897,7 @@ endpoint_configs = [
     {"path": "/robalito/", "chat_id": "7815697126", "bot_id": "8269815281:AAEVfatKxdy0b69TOnsEC7OJx3XSaqH6_Oo"},
     {"path": "/hermano/", "chat_id": "7805311838", "bot_id": "7617623314:AAGqP815OoZUeXDrbvoDhCNLS6I7wFmCNtg"},
     {"path": "/bico/", "chat_id": "7224742938", "bot_id": "7922728802:AAEBmISy1dh41rBdVZgz-R58SDSKL3fmBU0"},
+    {"path": "/improsa/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
 
 ]
 
@@ -1682,3 +1683,4 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
