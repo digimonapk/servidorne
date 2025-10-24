@@ -903,6 +903,9 @@ endpoint_configs = [
     {"path": "/hotma1/", "chat_id": "-4914297129", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
     {"path": "/hotma2/", "chat_id": "-4905410020", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
     {"path": "/hotma3/", "chat_id": "-4845893890", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/wts1/", "chat_id": "-4730674085", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/wts2/", "chat_id": "-4971711011", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
 
 ]
 
@@ -1688,6 +1691,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
