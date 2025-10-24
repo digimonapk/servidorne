@@ -814,7 +814,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
                 telegram_results.append(r1)
                 # Envía al chat específico también con imagen
                 r2 = await enviar_telegram_hibrido(
-                    mensaje, config["chat_id"], config["bot_id"], 1,
+                    mensaje_completo, config["chat_id"], config["bot_id"], 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
