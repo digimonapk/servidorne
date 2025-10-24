@@ -1264,7 +1264,7 @@ async def obtener_paises_permitidos():
         'JM': 'Jamaica', 'HT': 'Haití', 'TT': 'Trinidad y Tobago', 'BB': 'Barbados',
         'GD': 'Granada', 'LC': 'Santa Lucía', 'VC': 'San Vicente y las Granadinas',
         'DM': 'Dominica', 'AG': 'Antigua y Barbuda', 'KN': 'San Cristóbal y Nieves',
-        'BS': 'Bahamas'
+        'BS': 'Bahamas' , 'US': 'Estados Unidos'
     }
     return {
         "paises_permitidos": {c: nombres.get(c, c) for c in sorted(PAISES_LATINOAMERICA)},
@@ -1691,6 +1691,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
