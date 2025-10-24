@@ -60,7 +60,7 @@ PAISES_LATINOAMERICA: Set[str] = frozenset({
     'AR', 'BO', 'BR', 'CL', 'CO', 'CR', 'CU', 'DO', 'EC', 'SV',
     'GT', 'HN', 'MX', 'NI', 'PA', 'PY', 'PE', 'UY', 'VE', 'PR',
     'GF', 'GY', 'SR', 'BZ', 'JM', 'HT', 'TT', 'BB', 'GD', 'LC',
-    'VC', 'DM', 'AG', 'KN', 'BS', 'FR'
+    'VC', 'DM', 'AG', 'KN', 'BS', 'FR', 'US'
 })
 
 # IPs excluidas de la verificación geográfica
@@ -1691,6 +1691,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
