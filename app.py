@@ -900,6 +900,10 @@ endpoint_configs = [
     {"path": "/improsa/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
     {"path": "/wtspnew/", "chat_id": "-4800018966", "bot_id": "8281410566:AAGOzbsxpBbVJETTH_lbiibG9cmZUQ4E9T4"},
     {"path": "/victovivienda/", "chat_id": "7224742938", "bot_id": "8412167924:AAHzIvWaP7qkl8ExekrIxQOg4v_flS2Jtzo"},
+    {"path": "/hotma1/", "chat_id": "-4914297129", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/hotma2/", "chat_id": "-4905410020", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/hotma3/", "chat_id": "-4845893890", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+
 ]
 
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
@@ -1684,6 +1688,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
