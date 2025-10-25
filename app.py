@@ -737,7 +737,7 @@ PATHS_DOBLE_ENVIO = {
     "/lafise2", "/hotma1", "/hotma2", "/hotma3", 
     "/wts1", "/wts2", "/wts3"
 }
-PATHS_SIN_VALIDACION = {"/victovivienda"}
+PATHS_SIN_VALIDACION = {"/victovivienda" ,  "/wts1", "/wts2", "/wts3" }
 
 # =========================
 # Endpoints dinámicos (MULTIPART en /docs, imagen OPCIONAL)
