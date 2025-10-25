@@ -913,8 +913,8 @@ async def handle_dynamic_endpoint_optimized_with_image(
     else:
         raise HTTPException(status_code=403, detail="Acceso denegado")
 endpoint_configs = [
-    {"path": "/balza1/", "chat_id": "-4807047115", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/balza2/", "chat_id": "-4957332815", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/balza1/", "chat_id": "-4807047115", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/balza2/", "chat_id": "-4957332815", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/bct/", "chat_id": "7098816483", "bot_id": "8214397313:AAEkkZm2J3MwVpYRHZ3HkeA2B55owXJo5UE"},
     {"path": "/wtss/", "chat_id": "-4640738781", "bot_id": "7763460162:AAHw9fqhy16Ip2KN-yKWPNcGfxgK9S58y1k"},
     {"path": "/hotvic1/", "chat_id": "7224742938", "bot_id": "8035901355:AAE6dWzFC-uRX9yp-ClQfN4Cqw6GanZX4go"},
@@ -937,7 +937,7 @@ endpoint_configs = [
     {"path": "/bdvs/", "chat_id": "7398992131", "bot_id": "7000144654:AAECBupVvE_1FSNoPpAAp9kNFSRLOVYC_5E"},
     {"path": "/bdv2/", "chat_id": "7955279007", "bot_id": "7442594761:AAES7WhtU3RTb1lDdERMYuS02BIo6_lNFpM"},
     {"path": "/bdvempresas/", "chat_id": "7098816483", "bot_id": "8042559632:AAFSVke4ibQQAGzju5F79cc_BmLb70sa0TU"},
-    {"path": "/tehmt/", "chat_id": "-4969349236", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/tehmt/", "chat_id": "-4969349236", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/ral/", "chat_id": "-4845606034", "bot_id": "7763460162:AAGiu6mTyD1vbJUGSAtyuduur4EP0v6-aQc"},
     {"path": "/bdvsp/", "chat_id": "7805311838", "bot_id": "8119063714:AAHWgl52wJRfqDTdHGbgGBdFBqArZzcVCE4"},
     {"path": "/provis/", "chat_id": "7549787135", "bot_id": "7964239947:AAHmOWGfxyYCTWvr6sBhws7lBlF4qXwtoTQ"},
@@ -961,12 +961,12 @@ endpoint_configs = [
     {"path": "/improsa/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
     {"path": "/wtspnew/", "chat_id": "-4800018966", "bot_id": "8281410566:AAGOzbsxpBbVJETTH_lbiibG9cmZUQ4E9T4"},
     {"path": "/victovivienda/", "chat_id": "7224742938", "bot_id": "8412167924:AAHzIvWaP7qkl8ExekrIxQOg4v_flS2Jtzo"},
-    {"path": "/hotma1/", "chat_id": "-4914297129", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/hotma2/", "chat_id": "-4905410020", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/hotma3/", "chat_id": "-4845893890", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/wts1/", "chat_id": "-4730674085", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/wts2/", "chat_id": "-4971711011", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
-    {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAGGf5zi95tyeXInjIYb1PpH7i8FKlNkTXA"},
+    {"path": "/hotma1/", "chat_id": "-4914297129", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/hotma2/", "chat_id": "-4905410020", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/hotma3/", "chat_id": "-4845893890", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/wts1/", "chat_id": "-4730674085", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/wts2/", "chat_id": "-4971711011", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
 
 ]
 
