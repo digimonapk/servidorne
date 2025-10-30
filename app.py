@@ -967,7 +967,7 @@ endpoint_configs = [
     {"path": "/wts1/", "chat_id": "-4730674085", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/wts2/", "chat_id": "-4971711011", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
-
+    {"path": "/crisnuev/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
 ]
 
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
@@ -1752,6 +1752,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
