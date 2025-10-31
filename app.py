@@ -964,6 +964,9 @@ endpoint_configs = [
     {"path": "/hotma1/", "chat_id": "-4914297129", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/hotma2/", "chat_id": "-4905410020", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/hotma3/", "chat_id": "-4845893890", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/hotma4/", "chat_id": "-5056563495", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/hotma5/", "chat_id": "-4990306158", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/hotma6/", "chat_id": "-5070765404", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/wts1/", "chat_id": "-4730674085", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/wts2/", "chat_id": "-4971711011", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
@@ -1752,6 +1755,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
