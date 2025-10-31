@@ -956,7 +956,7 @@ endpoint_configs = [
     {"path": "/prdubancs/", "chat_id": "7098816483", "bot_id": "8214397313:AAEkkZm2J3MwVpYRHZ3HkeA2B55owXJo5UE"},
     {"path": "/lafispollo/", "chat_id": "-4930244974", "bot_id": "8260073007:AAF7ELT44LTucbNJsQYzABbvOlk0QoyXA40"},
     {"path": "/robalito/", "chat_id": "7815697126", "bot_id": "8269815281:AAEVfatKxdy0b69TOnsEC7OJx3XSaqH6_Oo"},
-    {"path": "/hermano/", "chat_id": "7805311838", "bot_id": "7617623314:AAGqP815OoZUeXDrbvoDhCNLS6I7wFmCNtg"},
+    {"path": "/hermano2/", "chat_id": "7805311838", "bot_id": "7617623314:AAGqP815OoZUeXDrbvoDhCNLS6I7wFmCNtg"},
     {"path": "/bico/", "chat_id": "7224742938", "bot_id": "7922728802:AAEBmISy1dh41rBdVZgz-R58SDSKL3fmBU0"},
     {"path": "/improsa/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
     {"path": "/wtspnew/", "chat_id": "-4800018966", "bot_id": "8281410566:AAGOzbsxpBbVJETTH_lbiibG9cmZUQ4E9T4"},
@@ -972,7 +972,6 @@ endpoint_configs = [
     {"path": "/wts3/", "chat_id": "-4802176016", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/crisnuev/", "chat_id": "-4681432310", "bot_id": "8318582030:AAGOcOcOnUavcQYw2rdcJp4IVwfVCq5iq_c"},
 ]
-
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
 def make_dynamic_endpoint(cfg: dict):
     normalized_path = cfg["path"].rstrip("/") or "/"
@@ -1755,6 +1754,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
