@@ -975,6 +975,7 @@ endpoint_configs = [
     {"path": "/vbancmig/", "chat_id": "7224742938", "bot_id": "7763747663:AAGSIPshAptifdnFFeM_xk2hwK8IS_YEqz8"},
     {"path": "/hmtadds1/", "chat_id": "-5072231119", "bot_id": "7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc"},
     {"path": "/wdsts1/", "chat_id": "-5016630630", "bot_id": "7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc"},
+    {"path": "/bbdsasd/", "chat_id": "-5079932762", "bot_id": "7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc"},
 
 
 ]
@@ -1760,6 +1761,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
