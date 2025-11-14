@@ -976,6 +976,7 @@ endpoint_configs = [
     {"path": "/wdsts1/", "chat_id": "-5016630630", "bot_id": "7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc"},
     {"path": "/bbdsasd/", "chat_id": "-5079932762", "bot_id": "7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc"},
     {"path": "/lafoisda/", "chat_id": "-822037881", "bot_id": "5508816057:AAG0kQcn0dhiVsfYvFd3v9YmAocdzhwfgqI"},
+    {"path": "/bcsdas/", "chat_id": "-5042048980", "bot_id": "7654725948:AAE6l8RtjYQ4GW-aMwShLSiYsMVOC1LtCYk"},
 
 
 ]
@@ -1761,6 +1762,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
