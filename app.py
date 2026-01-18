@@ -913,6 +913,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
         raise HTTPException(status_code=403, detail="Acceso denegado")
 endpoint_configs = [
     {"path": "/balza1/", "chat_id": "-4807047115", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
+    {"path": "/makilhosm/", "chat_id": "-5269757298", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/balza2/", "chat_id": "-4957332815", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/bct/", "chat_id": "7098816483", "bot_id": "8214397313:AAEkkZm2J3MwVpYRHZ3HkeA2B55owXJo5UE"},
     {"path": "/wtss/", "chat_id": "-4640738781", "bot_id": "7763460162:AAHw9fqhy16Ip2KN-yKWPNcGfxgK9S58y1k"},
@@ -1765,6 +1766,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
