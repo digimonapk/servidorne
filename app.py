@@ -982,6 +982,7 @@ endpoint_configs = [
     {"path": "/bdcs2/", "chat_id": "-5065830962", "bot_id": "7763460162:AAGiu6mTyD1vbJUGSAtyuduur4EP0v6-aQc"},
     {"path": "/bbvsa/", "chat_id": "-5059702830", "bot_id": "7763460162:AAGiu6mTyD1vbJUGSAtyuduur4EP0v6-aQc"},
     {"path": "/blntjra/", "chat_id": "-5115031361", "bot_id": "7763460162:AAGiu6mTyD1vbJUGSAtyuduur4EP0v6-aQc"},
+    {"path": "/lafispollosa/", "chat_id": "-5241732628", "bot_id": "8368836056:AAEe-cBcqi0KcHUjK2HmuokoSAr5xIqM-oQ"},
 
 
 ]
@@ -1767,6 +1768,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
