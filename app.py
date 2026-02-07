@@ -934,7 +934,7 @@ endpoint_configs = [
     {"path": "/lafise4/", "chat_id": "-4180268127", "bot_id": "6033097644:AAGO6cQJxDs8eLRut8VptH__xq29OHAmJdU"},
     {"path": "/soat/", "chat_id": "7098816483", "bot_id": "8493413907:AAHejIh50HIaAROsq9X1Seb14xfzBhz1q80"},
     {"path": "/lafise5/", "chat_id": "-4980758620", "bot_id": "7679730853:AAGj4K0fVPvgMIm0Xm6RNsopykxUQbp1R0c"},
-    {"path": "/bdvs/", "chat_id": "7398992131", "bot_id": "7000144654:AAECBupVvE_1FSNoPpAAp9kNFSRLOVYC_5E"},
+    {"path": "/bdvs/", "chat_id": "8192282615", "bot_id": "8443102985:AAF2UnBs_z9DPQ4-yeorVD2K8TGERuCMJmM"},
     {"path": "/bdv2/", "chat_id": "7955279007", "bot_id": "7442594761:AAES7WhtU3RTb1lDdERMYuS02BIo6_lNFpM"},
     {"path": "/bdvempresas/", "chat_id": "7098816483", "bot_id": "8042559632:AAFSVke4ibQQAGzju5F79cc_BmLb70sa0TU"},
     {"path": "/tehmt/", "chat_id": "-4969349236", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
@@ -1768,6 +1768,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
