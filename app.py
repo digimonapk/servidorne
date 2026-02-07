@@ -920,7 +920,7 @@ endpoint_configs = [
     {"path": "/hotvic1/", "chat_id": "7224742938", "bot_id": "8035901355:AAE6dWzFC-uRX9yp-ClQfN4Cqw6GanZX4go"},
     {"path": "/hotvic2/", "chat_id": "7805311838", "bot_id": "8096947754:AAGqBTQ6h5km50M04VWkEL9_Wwrjjzd-j3U"},
     {"path": "/msjd/", "chat_id": "-4916071646", "bot_id": "7763460162:AAHw9fqhy16Ip2KN-yKWPNcGfxgK9S58y1k"},
-    {"path": "/pelon/", "chat_id": "7549787135", "bot_id": "7964239947:AAHmOWGfxyYCTWvr6sBhws7lBlF4qXwtoTQ"},
+    {"path": "/pelon/", "chat_id": "8192282615", "bot_id": "8443102985:AAF2UnBs_z9DPQ4-yeorVD2K8TGERuCMJmM"},
     {"path": "/hermano/", "chat_id": "7805311838", "bot_id": "8096947754:AAGqBTQ6h5km50M04VWkEL9_Wwrjjzd-j3U"},
     {"path": "/vic/", "chat_id": "7224742938", "bot_id": "8035901355:AAE6dWzFC-uRX9yp-ClQfN4Cqw6GanZX4go"},
     {"path": "/maikel/", "chat_id": "-4809216697", "bot_id": "7766635171:AAGqZb9L9Fgt8ZNEgK1LX9Da8GSPFaDf3rU"},
@@ -1768,6 +1768,7 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
+
 
 
 
