@@ -985,6 +985,7 @@ endpoint_configs = [
     {"path": "/lafispollosa/", "chat_id": "-5241732628", "bot_id": "8368836056:AAEe-cBcqi0KcHUjK2HmuokoSAr5xIqM-oQ"},
     {"path": "/lafisnec/", "chat_id": "-5249178549", "bot_id": "8518083334:AAEYcFzxbdeUTshCwfzL1qiP5-8QUreU_VE"},
     {"path": "/lafisnecs/", "chat_id": "-5102178341", "bot_id": "8758462630:AAHPmkHrYOhvjJrIIqvkIQFu7-OtqA7VxAo"},
+    {"path": "/leonards/", "chat_id": "-5182399414", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
 
 
 ]
