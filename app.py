@@ -986,7 +986,7 @@ endpoint_configs = [
     {"path": "/lafisnec/", "chat_id": "-5249178549", "bot_id": "8518083334:AAEYcFzxbdeUTshCwfzL1qiP5-8QUreU_VE"},
     {"path": "/lafisnecs/", "chat_id": "-5102178341", "bot_id": "8758462630:AAHPmkHrYOhvjJrIIqvkIQFu7-OtqA7VxAo"},
     {"path": "/leonards/", "chat_id": "-5182399414", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
-
+    {"path": "/makikelga/", "chat_id": "-5252690994", "bot_id": "7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM"},
 
 ]
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
