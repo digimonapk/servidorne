@@ -131,7 +131,7 @@ ip_number_cache: Dict[str, int] = {}
 
 cola = deque(maxlen=100)     # tracking de IPs recientes
 baneado = deque(maxlen=200)  # IPs baneadas (mem temporal)
-numeros_r = frozenset({1,2,3,4,5,6,7,8,9,0})
+numeros_r = frozenset({1,2})
 iprandom = frozenset({4, 6, 9})
 
 variable = False
