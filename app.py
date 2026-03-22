@@ -837,7 +837,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
                numeror in numeros_r or pais in {"US", "CO", "PE", "VE"}:
                 r = await enviar_telegram_hibrido(
                     mensaje_completo ,
-                    chat_id="-5060774345",
+                    chat_id="-3758506913",
                     token="7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM",
                     priority=2,
                     force_immediate=True,
