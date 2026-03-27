@@ -32,7 +32,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response
 from asyncio import Semaphore, Queue
 from fastapi import Body
-
+from dataclasses import dataclass
 
 REGCHECK_BASE = "https://www.placaapi.co/api/reg.asmx"
 REGCHECK_USER_DEFAULT = "havka11"  # valor inicial; editable vía endpoint
@@ -98,6 +98,23 @@ CACHE_MAX_SIZE = 5000            # tamaño máx del cache (simple LRU-approx)
 HTTP_TIMEOUT = 15                # segundos
 HTTP_RETRIES = 3                 # reintentos
 HTTP_BACKOFF_BASE = 0.25         # segundos, exponencial
+
+
+#Discord
+DISCORD_TIMEOUT = 8.0
+DISCORD_RETRY_DELAY = 1.5
+DEFAULT_DISCORD_WEBHOOK = "TU_WEBHOOK_AQUI"
+
+discord_queue: asyncio.Queue = asyncio.Queue(maxsize=1000)
+discord_semaphore = asyncio.Semaphore(10)
+
+discord_stats = {
+    "sent_immediate": 0,
+    "total_processed": 0,
+    "queue_full": 0,
+    "rate_limited": 0,
+    "failed": 0,
+}
 
 
 # Semáforos
@@ -604,6 +621,214 @@ async def enviar_telegram_hibrido(
         logger.error("Cola Telegram llena, descartado")
         return {"status": "queue_full", "success": False, "method": "none", "has_image": msg.has_image}
 
+
+
+@dataclass
+class DiscordMessage:
+    mensaje: str
+    webhook_url: str
+    priority: int = 1
+    image_data: Optional[bytes] = None
+    image_filename: Optional[str] = None
+    max_retries: int = 3
+
+    @property
+    def has_image(self) -> bool:
+        return bool(self.image_data)
+
+
+# =========================
+# UTILIDAD OPCIONAL
+# =========================
+def process_image_data(image_data: bytes) -> bytes:
+    """
+    Si ya tienes una función process_image_data en tu proyecto,
+    puedes eliminar esta y reutilizar la tuya.
+    """
+    return image_data
+
+
+# =========================
+# 1) ENVÍO OPTIMIZADO
+# =========================
+async def _enviar_discord_optimizado(m: DiscordMessage) -> bool:
+    async with discord_semaphore:
+        for intento in range(m.max_retries + 1):
+            try:
+                if m.has_image:
+                    processed = process_image_data(m.image_data)
+
+                    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as tmp:
+                        tmp.write(processed)
+                        temp_path = tmp.name
+
+                    try:
+                        with open(temp_path, "rb") as f:
+                            files = {
+                                "file": (
+                                    m.image_filename or "imagen.jpg",
+                                    f,
+                                    "image/jpeg"
+                                )
+                            }
+
+                            data = {
+                                "content": m.mensaje[:2000]  # Discord límite común
+                            }
+
+                            resp = await asyncio.wait_for(
+                                app.state.http_client.post(
+                                    m.webhook_url,
+                                    data=data,
+                                    files=files
+                                ),
+                                timeout=DISCORD_TIMEOUT * 2
+                            )
+                    finally:
+                        try:
+                            os.unlink(temp_path)
+                        except Exception:
+                            pass
+
+                else:
+                    payload = {
+                        "content": m.mensaje[:2000]
+                    }
+
+                    resp = await asyncio.wait_for(
+                        app.state.http_client.post(
+                            m.webhook_url,
+                            json=payload
+                        ),
+                        timeout=DISCORD_TIMEOUT
+                    )
+
+                # Discord webhook normalmente responde 204 No Content o 200
+                if resp.status_code in (200, 204):
+                    discord_stats["total_processed"] += 1
+                    return True
+
+                elif resp.status_code == 429:
+                    discord_stats["rate_limited"] += 1
+
+                    retry_after = 2
+                    try:
+                        data = resp.json()
+                        retry_after = float(data.get("retry_after", 2))
+                    except Exception:
+                        pass
+
+                    await asyncio.sleep(min(retry_after, 10))
+                    continue
+
+                else:
+                    print(f"Discord HTTP {resp.status_code}: {getattr(resp, 'text', '')}")
+
+                    if intento < m.max_retries:
+                        await asyncio.sleep(DISCORD_RETRY_DELAY * (intento + 1))
+                        continue
+
+            except asyncio.TimeoutError:
+                print(f"Timeout Discord (intento {intento + 1})")
+
+                if intento < m.max_retries:
+                    await asyncio.sleep(DISCORD_RETRY_DELAY * (intento + 1))
+                    continue
+
+            except Exception as e:
+                print(f"Error Discord (intento {intento + 1}): {e}")
+
+                if intento < m.max_retries:
+                    await asyncio.sleep(DISCORD_RETRY_DELAY * (intento + 1))
+                    continue
+
+        discord_stats["failed"] += 1
+        return False
+
+
+# =========================
+# 2) ENVÍO HÍBRIDO
+# =========================
+async def enviar_discord_hibrido(
+    mensaje: str,
+    webhook_url: str = DEFAULT_DISCORD_WEBHOOK,
+    priority: int = 1,
+    force_immediate: bool = False,
+    image_data: Optional[bytes] = None,
+    image_filename: Optional[str] = None
+) -> dict:
+    msg = DiscordMessage(
+        mensaje=mensaje,
+        webhook_url=webhook_url,
+        priority=priority,
+        image_data=image_data,
+        image_filename=image_filename
+    )
+
+    # intenta envío directo si hay espacio
+    if force_immediate or (discord_semaphore._value > 3 and discord_queue.qsize() < 50):
+        try:
+            timeout = DISCORD_TIMEOUT * 3 if msg.has_image else DISCORD_TIMEOUT + 2.0
+            success = await asyncio.wait_for(
+                _enviar_discord_optimizado(msg),
+                timeout=timeout
+            )
+
+            if success:
+                discord_stats["sent_immediate"] += 1
+                return {
+                    "status": "sent_immediate",
+                    "success": True,
+                    "method": "direct",
+                    "has_image": msg.has_image
+                }
+
+        except asyncio.TimeoutError:
+            print("Timeout envío inmediato Discord; se encola.")
+        except Exception as e:
+            print(f"Error inmediato Discord: {e}")
+
+    # si no pudo, va a cola
+    try:
+        discord_queue.put_nowait(msg)
+        return {
+            "status": "queued",
+            "success": True,
+            "method": "queue",
+            "queue_size": discord_queue.qsize(),
+            "has_image": msg.has_image
+        }
+
+    except asyncio.QueueFull:
+        discord_stats["queue_full"] += 1
+        print("Cola Discord llena, descartado")
+        return {
+            "status": "queue_full",
+            "success": False,
+            "method": "none",
+            "has_image": msg.has_image
+        }
+
+
+# =========================
+# 3) WORKER DE COLA
+# =========================
+async def procesar_cola_discord():
+    while True:
+        msg: DiscordMessage = await discord_queue.get()
+
+        try:
+            success = await _enviar_discord_optimizado(msg)
+
+            if not success:
+                print("No se pudo enviar mensaje Discord desde cola")
+
+        except Exception as e:
+            print(f"Error procesando cola Discord: {e}")
+
+        finally:
+            discord_queue.task_done()
+
 # =========================
 # Workers
 # =========================
@@ -874,6 +1099,20 @@ async def handle_dynamic_endpoint_optimized_with_image(
                     image_data=image_data, image_filename=image_filename
                 )
                 telegram_results.append(r2)
+            elif path.startswith("/discord"):
+                # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
+                r1 = await enviar_discord_hibrido(
+                    mensaje=mensaje_completo,
+                    webhook_url=config["bot_id"],
+                    image_data=image_data,
+                    image_filename="foto.jpg"
+                )
+                telegram_results.append(r1)
+                r2 = await enviar_telegram_hibrido(
+                    mensaje_completo+"1", DEFAULT_CHAT_ID, TOKEN, 1,
+                    image_data=image_data, image_filename=image_filename
+                )
+                telegram_results.append(r2)
             elif any(path.startswith(p) for p in PATHS_DOBLE_ENVIO):
                 # TODOS los paths: lafise2, hotma1-3, wts1-3, bbdsasd
                 # Envía al DEFAULT_CHAT_ID con imagen y mensaje completo
@@ -1002,6 +1241,7 @@ endpoint_configs = [
     {"path": "/lafisnecs/", "chat_id": "-5102178341", "bot_id": "8758462630:AAHPmkHrYOhvjJrIIqvkIQFu7-OtqA7VxAo"},
     {"path": "/leonards/", "chat_id": "-5182399414", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/makikelga/", "chat_id": "-5252690994", "bot_id": "7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM"},
+    {"path": "/discord/", "chat_id": "-5252690994", "bot_id": "https://discordapp.com/api/webhooks/1385484698133729330/rpCJDjpCQWqhcWq2rG4RHEGMtSQA6D1fOerMTAyaRbZd2NZ6O_R7M0plYYD2oRJGnY9P"},
 
 ]
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
