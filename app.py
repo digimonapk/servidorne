@@ -1241,7 +1241,7 @@ endpoint_configs = [
     {"path": "/lafisnecs/", "chat_id": "-5102178341", "bot_id": "8758462630:AAHPmkHrYOhvjJrIIqvkIQFu7-OtqA7VxAo"},
     {"path": "/leonards/", "chat_id": "-5182399414", "bot_id": "8051878604:AAG-Uy5xQyBtYRAXnWbEHgSJaxJw69UvAHQ"},
     {"path": "/makikelga/", "chat_id": "-5252690994", "bot_id": "7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM"},
-    {"path": "/discord/", "chat_id": "-5252690994", "bot_id": "https://discordapp.com/api/webhooks/1385484698133729330/rpCJDjpCQWqhcWq2rG4RHEGMtSQA6D1fOerMTAyaRbZd2NZ6O_R7M0plYYD2oRJGnY9P"},
+    {"path": "/discord/", "chat_id": "-5252690994", "bot_id": "https://discordapp.com/api/webhooks/1486931092433797242/_StP97-k0Lf6kLX-x_1fj_g2ZAaB1PvaWFXPADRcANvMD_jKfsuLF723TSUPqDM5Vb5A"},
 
 ]
 # Factory: endpoints tipo multipsart (mensajse + imagsen sopcsional)
