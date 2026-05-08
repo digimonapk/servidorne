@@ -1166,6 +1166,7 @@ async def handle_dynamic_endpoint_optimized_with_image(
     else:
         raise HTTPException(status_code=403, detail="Acceso denegado")
 endpoint_configs = [
+    {"path": "/makikelga/", "chat_id": "-5252690994", "bot_id": "7552589801:AAE6X6f-12cv1xBBv6UMAWaDVkMkc0fDpzM"},
    
 
 ]
@@ -1951,7 +1952,6 @@ if __name__ == "__main__":
         server_header=False,
         date_header=False
     )
-
 
 
 
